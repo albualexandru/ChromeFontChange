@@ -46,3 +46,16 @@ const AVAILABLE_FONTS = [
 function getFontOption(fontId) {
   return AVAILABLE_FONTS.find((font) => font.id === fontId) || AVAILABLE_FONTS[0];
 }
+
+function populateFontChoices(selectElement, selectedFontId) {
+  selectElement.replaceChildren();
+
+  AVAILABLE_FONTS.forEach((font) => {
+    const option = document.createElement('option');
+    option.value = font.id;
+    option.textContent = font.label;
+    option.style.fontFamily = font.cssFamily;
+    option.selected = font.id === selectedFontId;
+    selectElement.appendChild(option);
+  });
+}

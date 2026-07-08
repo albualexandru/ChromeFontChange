@@ -1,4 +1,41 @@
 const STYLE_ELEMENT_ID = 'chrome-font-change-style';
+const FONT_TARGET_SELECTOR = [
+  'html',
+  'body',
+  'p',
+  'span',
+  'a',
+  'li',
+  'dt',
+  'dd',
+  'label',
+  'button',
+  'input',
+  'textarea',
+  'select',
+  'blockquote',
+  'cite',
+  'figcaption',
+  'small',
+  'strong',
+  'em',
+  'div',
+  'article',
+  'section',
+  'main',
+  'aside',
+  'nav',
+  'header',
+  'footer',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'td',
+  'th'
+].join(',\n    ');
 
 function renderFontStyle(fontId) {
   const font = getFontOption(fontId);
@@ -11,9 +48,7 @@ function renderFontStyle(fontId) {
   }
 
   styleElement.textContent = `
-    html,
-    body,
-    body :not(svg):not(path):not(script):not(style):not(noscript):not(textarea):not(input) {
+    ${FONT_TARGET_SELECTOR} {
       font-family: ${font.cssFamily} !important;
     }
   `;
@@ -24,12 +59,10 @@ async function loadAndApplyPreferredFont() {
   renderFontStyle(stored[STORAGE_KEY]);
 }
 
-chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message) => {
   if (message && message.type === 'applyFont') {
     renderFontStyle(message.fontId);
   }
-
-  sendResponse();
 });
 
 chrome.storage.onChanged.addListener((changes, areaName) => {

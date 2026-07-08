@@ -34,7 +34,9 @@ function applyFontToTab(tabId, fontId) {
   chrome.tabs.sendMessage(tabId, {
     type: 'applyFont',
     fontId
-  }).catch(() => {});
+  }).catch((error) => {
+    console.debug('ChromeFontChange could not update the current tab.', error);
+  });
 }
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -46,11 +48,13 @@ chrome.runtime.onStartup.addListener(() => {
 });
 
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (!info.menuItemId.startsWith(CONTEXT_MENU_FONT_PREFIX)) {
+  const menuItemId = String(info.menuItemId);
+
+  if (!menuItemId.startsWith(CONTEXT_MENU_FONT_PREFIX)) {
     return;
   }
 
-  const fontId = info.menuItemId.replace(CONTEXT_MENU_FONT_PREFIX, '');
+  const fontId = menuItemId.replace(CONTEXT_MENU_FONT_PREFIX, '');
   const selectedFont = getFontOption(fontId);
 
   await chrome.storage.sync.set({
