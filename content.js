@@ -54,9 +54,7 @@ function renderFontStyle(fontId) {
 
 async function loadAndApplyPreferredFont() {
   const stored = await chrome.storage.sync.get(STORAGE_KEY);
-  if (stored[STORAGE_KEY]) {
-    renderFontStyle(stored[STORAGE_KEY]);
-  }
+  renderFontStyle(stored[STORAGE_KEY] || DEFAULT_FONT_ID);
 }
 
 chrome.runtime.onMessage.addListener((message) => {

@@ -27,7 +27,7 @@ async function createContextMenus() {
 }
 
 function applyFontToTab(tabId, fontId) {
-  if (tabId === null || tabId === undefined) {
+  if (tabId == null) {
     return;
   }
 
@@ -39,7 +39,14 @@ function applyFontToTab(tabId, fontId) {
   });
 }
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener(async () => {
+  const stored = await chrome.storage.sync.get(STORAGE_KEY);
+  if (!stored[STORAGE_KEY]) {
+    await chrome.storage.sync.set({
+      [STORAGE_KEY]: DEFAULT_FONT_ID
+    });
+  }
+
   createContextMenus();
 });
 
