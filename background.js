@@ -35,7 +35,7 @@ function applyFontToTab(tabId, fontId) {
     type: 'applyFont',
     fontId
   }).catch((error) => {
-    console.debug('ChromeFontChange could not update the current tab.', error);
+    console.warn('ChromeFontChange could not update the current tab.', error);
   });
 }
 

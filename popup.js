@@ -1,4 +1,4 @@
-async function getActiveTabId() {
+async function tryGetActiveTabId() {
   const [tab] = await chrome.tabs.query({
     active: true,
     currentWindow: true
@@ -24,14 +24,14 @@ async function initializePopup() {
       [STORAGE_KEY]: nextFont.id
     });
 
-    const activeTabId = await getActiveTabId();
+    const activeTabId = await tryGetActiveTabId();
     if (activeTabId) {
       await chrome.tabs.sendMessage(activeTabId, {
         type: 'applyFont',
         fontId: nextFont.id
       }).catch((error) => {
-        console.debug('ChromeFontChange could not update the current tab.', error);
-        statusElement.textContent = `Saved ${nextFont.label}, but Chrome could not update this page.`;
+        console.warn('ChromeFontChange could not update the current tab.', error);
+        statusElement.textContent = `Saved ${nextFont.label}, but this page cannot be modified (for example, Chrome system pages are protected).`;
       });
     }
 

@@ -38,8 +38,6 @@ const FONT_TARGET_SELECTOR = [
 ].join(',\n    ');
 
 function renderFontStyle(fontId) {
-  const font = getFontOption(fontId);
-
   let styleElement = document.getElementById(STYLE_ELEMENT_ID);
   if (!styleElement) {
     styleElement = document.createElement('style');
@@ -49,7 +47,7 @@ function renderFontStyle(fontId) {
 
   styleElement.textContent = `
     ${FONT_TARGET_SELECTOR} {
-      font-family: ${font.cssFamily} !important;
+      font-family: ${getFontCssFamily(fontId)} !important;
     }
   `;
 }
