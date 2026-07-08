@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #1f1f1f;
+  background: #ffffff;
+}
+
+.panel,
+.page main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.panel {
+  min-width: 240px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+label {
+  font-size: 14px;
+}
+
+select,
+button,
+a {
+  font-size: 14px;
+}
+
+select,
+button {
+  padding: 8px;
+}
+
+.status {
+  min-height: 20px;
+  margin: 0;
+  color: #0b57d0;
+}
