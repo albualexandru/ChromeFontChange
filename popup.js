@@ -4,7 +4,7 @@ async function tryGetActiveTabId() {
     currentWindow: true
   });
 
-  return tab && tab.id;
+  return tab?.id ?? null;
 }
 
 async function initializePopup() {

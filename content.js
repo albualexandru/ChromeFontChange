@@ -35,7 +35,7 @@ const FONT_TARGET_SELECTOR = [
   'h6',
   'td',
   'th'
-].join(',\n    ');
+].join(', ');
 
 function renderFontStyle(fontId) {
   let styleElement = document.getElementById(STYLE_ELEMENT_ID);
@@ -54,7 +54,9 @@ function renderFontStyle(fontId) {
 
 async function loadAndApplyPreferredFont() {
   const stored = await chrome.storage.sync.get(STORAGE_KEY);
-  renderFontStyle(stored[STORAGE_KEY]);
+  if (stored[STORAGE_KEY]) {
+    renderFontStyle(stored[STORAGE_KEY]);
+  }
 }
 
 chrome.runtime.onMessage.addListener((message) => {

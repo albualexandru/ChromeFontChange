@@ -27,7 +27,7 @@ async function createContextMenus() {
 }
 
 function applyFontToTab(tabId, fontId) {
-  if (!tabId) {
+  if (tabId === null || tabId === undefined) {
     return;
   }
 
@@ -61,7 +61,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     [STORAGE_KEY]: selectedFont.id
   });
 
-  applyFontToTab(tab && tab.id, selectedFont.id);
+  applyFontToTab(tab?.id, selectedFont.id);
 });
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
