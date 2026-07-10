@@ -15,3 +15,7 @@ ChromeFontChange is a Google Chrome extension that lets you pick a preferred fon
 2. Enable **Developer mode**
 3. Click **Load unpacked**
 4. Select this repository folder
+
+## Privacy Policy
+
+See [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details on data handling.
